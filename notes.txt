@@ -1,0 +1,29 @@
+ab -p tmp.txt -T application/json -c 40 -n 2000 http://0.0.0.0:8080/predict?=
+
+docker build -t gcr.io/varsha-project/sentimentclassifier:v1 .
+
+docker images
+
+docker run -it -p 8080:8080 gcr.io/varsha-project/sentimentclassifier:v1
+curl http://localhost:8080/health
+
+
+docker ps
+#docker kill containerID
+#docker ps -a
+#<<Grab containerID>>
+docker logs e70844d3b4f3
+
+docker exec -it e70844d3b4f3 bash
+
+#To remove image ---> docker rmi IMAGE ID
+# to remove ---> docker rm <<container_ID>>
+
+
+docker tag local-image:tagname new-repo:tagname
+docker push new-repo:tagname
+
+
+docker tag gcr.io/varsha-project/sentimentclassifier:v1 bhushanbhangebrb/sentimentclassifier:v1
+docker push bhushanbhangebrb/sentimentclassifier:v1
+docker pull bhushanbhangebrb/sentimentclassifier:v1
